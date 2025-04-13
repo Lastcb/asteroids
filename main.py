@@ -1,19 +1,28 @@
 import pygame
 from constants import *
-
-pygame.init()
+from player import Player
 
 def main():
-
-    screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
+    pygame.init()
+    clock = pygame.time.Clock()
+    screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT)) 
+    clock = pygame.time.Clock()
+    player = Player(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2)
+    dt = 0
     running = True
+
     while running:
-        pygame.Surface.fill(screen, (0, 0, 0))
-        pygame.display.flip()
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 running = False
-    
+        
+        screen.fill((0,0,0))
+        player.draw(screen)
+        player.update(dt)
+        pygame.display.flip()
+
+        dt = clock.tick(60) / 1000
+        #print(f"{dt}")
 
 if __name__ == "__main__":
     main()
