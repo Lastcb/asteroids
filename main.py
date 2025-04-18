@@ -1,4 +1,4 @@
-import pygame, sys
+import pygame, sys, random
 from constants import *
 from player import Player, Shot
 from asteroidfield import AsteroidField
@@ -33,7 +33,12 @@ def main():
             if asteroid.collision(player) == True:
                 print("Game over!")
                 sys.exit()
-                
+        for asteroid in asteroids:
+            for shot in shots:
+                if asteroid.collision(shot) == True:
+                    asteroid.split()
+                    shot.kill()
+
         screen.fill((0,0,0))
         
         for obj in drawable:
